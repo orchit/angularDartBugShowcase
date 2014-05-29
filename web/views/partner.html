@@ -1,0 +1,328 @@
+<link rel="stylesheet" href="/modules/mod_orchit_baumodul/tmpl/css/view_admin_company.css"/>
+<link rel="stylesheet" href="/modules/mod_orchit_baumodul/tmpl/css/messageAdminPanel.css"/>
+<link rel="stylesheet" href="/modules/mod_orchit_baumodul/tmpl/css/view_sample.css"/>
+
+<div id="partnerAdminArea" partner-admin>
+    <messages config="ctrl.messageConfig"></messages>
+    <div id="editPartner">
+        <div id="editPartnerHead">
+            <h1>
+                Administration Werbepartner
+            </h1>
+
+            <select class="adminform_input_50_top_2" ng-model="ctrl.currentId"
+                    id="frmSelectPartner">
+                <option value="">Werbepartner auswählen oder Formular zurücksetzen</option>
+                <option ng-repeat="partner in ctrl.partners" ng-value="partner.id">{{partner.name}}
+                </option>
+            </select>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <tabset justified="true">
+    <tab heading="Bearbeiten" id="editPartnerBase">
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="adminform_unit">
+                    <div>Firma</div>
+                    <input type="text" class="adminform_input" ng-model="ctrl.currentPartner.name"
+                           id="inputPartnerName"
+                           placeholder="Ihre Firma">
+                </div>
+                <div class="adminform_unit">
+                    <div>Straße / Hausnummer</div>
+                    <input type="text" class="adminform_input_50" ng-model="ctrl.currentPartner.streetName"
+                           id="inputPartnerStreetName" placeholder="Straße">
+                    <input type="text" class="adminform_input_50" ng-model="ctrl.currentPartner.streetNumber"
+                           id="inputPartnerStreetNumber" placeholder="1a">
+                </div>
+                <div class="adminform_unit">
+                    <div>Postleitzahl / Ort</div>
+                    <input type="text" class="adminform_input_50" ng-model="ctrl.currentPartner.zipCode"
+                           id="inputPartnerZipcode" placeholder="10000">
+                    <input type="text" class="adminform_input_50" id="inputPartnerCity"
+                           ng-model="ctrl.currentPartner.city"
+                           placeholder="Berlin">
+                </div>
+                <div class="adminform_unit">
+                    <div>E-Mail Adresse</div>
+                    <input type="email" class="adminform_input" id="inputPartnerMail"
+                           ng-model="ctrl.currentPartner.mail"
+                           placeholder="info@yourpage.com">
+                </div>
+                <div class="adminform_unit">
+                    <div>Homepage</div>
+                    <input type="url" class="adminform_input" id="inputPartnerUri"
+                           ng-model="ctrl.currentPartner.uri"
+                           placeholder="http://www.yourpage.com">
+                </div>
+                <div class="adminform_unit">
+                    <div>Telefonnummer</div>
+                    <input type="text" class="adminform_input" id="inputPartnerTel"
+                           ng-model="ctrl.currentPartner.telephone"
+                           placeholder="+49 (0)30 123123-1">
+                </div>
+                <div class="adminform_unit">
+                    <div>Telefaxnummer</div>
+                    <input type="text" class="adminform_input" id="inputPartnerFax"
+                           ng-model="ctrl.currentPartner.fax"
+                           placeholder="+49 (0)30 123123-2">
+                </div>
+                <div class="adminform_unit">
+                    <div>
+                        Kategorie auswählen
+                    </div>
+                    <select ng-model="ctrl.currentPartner.mainCategoryId" id="inputPartnerMainCategory"
+                            name="inputPartnerMainCategory" class="adminform_input_100_top">
+                        <option value="">Kategorie auswählen</option>
+                        <option ng-repeat="option in ctrl.categories" ng-value="option.id">{{option.name}}</option>
+                    </select>
+                </div>
+                <div class="adminform_unit">
+                    <div>
+                        Branche
+                    </div>
+                    <input ng-model="ctrl.currentPartner.department" type="text" placeholder="Ihre Branche"
+                           name="inputPartnerDepartment" class="adminform_input">
+                </div>
+                <div class="adminform_units adminform_unit">
+                    <div class="adminform_hd">Global oder Landkreis/en zugeordnet</div>
+                    <label class="checkbox adminform_unit">
+                        <input
+                                type="checkbox"
+                                ng-model="ctrl.currentPartner.isGlobal"
+                                name="inputPartnerGlobal"
+                                id="inputPartnerGlobal"/><span
+                            id="inputPartnerGlobalText"> globaler Werbepartner</span></label>
+
+                </div>
+                <div class="adminform_unit" ng-if="ctrl.currentPartner.id==null">
+                    <div>
+                        Bauunternehmer für die Erstellung zuordnen (Nur für Administratoren optional!)
+                    </div>
+                    <select class="adminform_input_100_top" name="inputPartnerDeveloperId"
+                            id="inputPartnerDeveloperId"
+                            ng-model="ctrl.initialDeveloper">
+                        <option value="">Bauunternehmen auswählen</option>
+                        <option ng-repeat="dev in ctrl.developers" ng-value="dev">{{dev.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="adminform_unit">
+                    <div>Status</div>
+                    <select class="adminform_input_100_top"
+                            ng-model="ctrl.currentPartner.status">
+                        <option ng-repeat="status in ctrl.currentPartner.availableStatuses" ng-value="status.id">
+                            {{status.name}}
+                        </option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="span6">
+                <div class="adminform_unit">
+                    <div>Interne Notiz</div>
+                    <div>
+                        <textarea id="inputPartnerDesc" class="adminform_textarea"
+                                  ng-model="ctrl.currentPartner.description"
+                                  placeholder="Interne Informationen, werden nicht im Endkundenbereich gezeigt"></textarea>
+                    </div>
+                </div>
+                <div id="editPartnerLogo">
+                    <div class="adminform_unit">
+                        <div ng-show="ctrl.previewUrl==null">Aktuelles Logo</div>
+                        <div ng-show="ctrl.previewUrl!=null">Neues Logo</div>
+                        <div class="address_invert">Breite: exakt 180 Pixel // Höhe: flexibel, max. 135 Pixel</div>
+                        <img id="actLogoPartner" class="img-logo"
+                             ng-show="ctrl.previewUrl==null && ctrl.currentPartner.id!=null"
+                             ng-src="{{ctrl.currentPartner.image}}">
+
+                        <img id="newLogoPartner" class="img-logo" ng-show="ctrl.previewUrl!=null"
+                             ng-src="{{ctrl.previewUrl}}">
+                    </div>
+                    <div class="adminform_unit">
+                        <div>Logo hochladen</div>
+                        <input type="file" class="adminform_input" ng-model="ctrl.images"
+                               id="uploadPartnerImage">
+                    </div>
+                </div>
+                <div class="adminform_units">
+                    <div class="adminform_hd adminform_unit adminform_units">Ansprechpartner des Werbepartners</div>
+                    <div class="adminform_unit">
+                        <div>
+                            Name
+                        </div>
+                        <input type="text" name="inputPartnerContactName" placeholder="Name des Ansprechpartners"
+                               ng-model="ctrl.currentPartner.contactName"
+                               class="adminform_input">
+                    </div>
+                    <div class="adminform_unit">
+                        <div>
+                            Telefonnummer
+                        </div>
+                        <input type="text" name="inputPartnerContactTel"
+                               placeholder="Telefonnummer des Ansprechpartners"
+                               ng-model="ctrl.currentPartner.contactTelephone"
+                               class="adminform_input">
+                    </div>
+                    <div class="adminform_unit">
+                        <div>Mobilfunknummer</div>
+                        <input type="text" class="adminform_input" id="inputPartnerMob"
+                               ng-model="ctrl.currentPartner.mobile"
+                               placeholder="+49 (0)170 100100 10">
+                    </div>
+                    <div class="adminform_unit">
+                        <div>
+                            E-Mail-Adresse
+                        </div>
+                        <input type="text" name="inputPartnerContactMail"
+                               placeholder="E-Mail Adresse des Ansprechpartners"
+                               ng-model="ctrl.currentPartner.contactEmail"
+                               class="adminform_input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- work around angular bug
+            {{ctrl.currentPartner.name}}
+            {{ctrl.currentPartner.streetName}}
+            {{ctrl.currentPartner.streetNumber}}
+            {{ctrl.currentPartner.zipCode}}
+            {{ctrl.currentPartner.city}}
+            {{ctrl.currentPartner.department}}
+            {{ctrl.currentPartner.telephone}}
+            {{ctrl.currentPartner.mail}}
+        work around angular bug -->
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="adminform_units">
+                    <button type="button" id="frmAddDeveloperBtnSave" ng-click="ctrl.save()"
+                            class="btn btn-primary adminform_unit">
+                        Werbepartner speichern
+                    </button>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="adminform_units">
+                    <button type="button" id="resetFormDeveloper" class="btn btn-primary pull-right margin-right"
+                            ng-click="ctrl.currentId = null">
+                        Werbepartner zurücksetzen
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vorschau -->
+        <div id="adminform_descriptionPartner" class="adminform_description row-fluid">
+            <div class="span6">
+                <div class="adminform_hd"> Vorschau Partnervisitenkarte für {{ctrl.currentPartner.name}}</div>
+                <br/>
+
+                <div class="partnerContainer">
+                    <strong id="description_title">{{ctrl.currentPartner.name}}</strong>
+                    <br>
+
+                    <div id="description_city" class="address_invert">{{ctrl.currentPartner.streetName}} {{ctrl.currentPartner.streetNumber}}, {{ctrl.currentPartner.zipCode}} {{ctrl.currentPartner.city}}</div>
+                    <div class="partner_logo">
+                        <div class="partnerBox">
+                            <a class="description_url" title="Sie verlassen BAUmyHAUS.de" target="_blank"
+                               ng-href="{{ctrl.currentPartner.uri}}">
+                                <img id="infoImagePartner" alt="" ng-src="{{ctrl.currentPartner.image}}"
+                                     ng-show="ctrl.previewUrl==null">
+                                <img id="newInfoImagePartner" alt="" ng-src="{{ctrl.previewUrl}}"
+                                     ng-show="ctrl.previewUrl!=null">
+                            </a>
+                        </div>
+                        <div id="description_department" class="department">{{ctrl.currentPartner.department}}</div>
+                    </div>
+                    <div class="partner_contact">
+                        <div class="phone_icon"></div>
+                        <div id="description_phone" class="txt_company">{{ctrl.currentPartner.telephone}}</div>
+                        <div class="clear"></div>
+                        <div class="email_icon"></div>
+                        <div class="txt_company">
+                            <a id="description_mail" href="mailto:{{ctrl.currentPartner.mail}}">{{ctrl.currentPartner.mail}}</a>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="globe_icon"></div>
+                        <div class="txt_company">
+                            <a class="description_url" title="Sie verlassen BAUmyHAUS.de" target="_blank"
+                               ng-href="{{ctrl.currentPartner.uri}}">zur
+                                Homepage</a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+
+    </tab>
+<tab heading="Mit PLZ verknüpfen" class="adminform_unit" ng-if="ctrl.currentId!=null">
+    <div class="row-fluid">
+        <div class="span12">
+                <h2>Werbepartner {{ctrl.currentPartner.name}} mit
+                    Postleitzahlen verknüpfen
+                </h2>
+                <zipCodeAssignment parentId="ctrl.currentPartner.id" saveType="32" getConnectionsType="55"></zipCodeAssignment>
+        </div>
+    </div>
+    </tab>
+    <tab heading="An Bauunternehmen heften" ng-if="ctrl.currentId!=null">
+    <div class="row-fluid">
+        <div class="span12" id="assignDevelopersToPartnerDiv" permissionCheck>
+            <h2>
+                {{ctrl.currentPartner.name}} an Bauunternehmen heften
+            </h2>
+
+            <div class="adminform_unit listBody">
+                <select class="adminform_input_100_bottom pull-left" name="inputPartnerDeveloperId"
+                        ng-model="currentDev">
+                    <option value="">Bauunternehmen auswählen</option>
+                    <option ng-repeat="dev in ctrl.developers" ng-value="dev">{{dev.name}}
+                    </option>
+                </select>
+
+                <button type="button" class="add_admin_panel button button-primary pull-right pointer"
+                        ng-disabled="currentDev==null||currentDev.id==null"
+                        title="Dieses Bauunternehmen hinzufügen"
+                        ng-click="ctrl.addDeveloper(currentDev);currentDev=null">
+                    +
+                </button>
+                <div class="clear"></div>
+                <div class="adminform_unit">
+                    <div id="selectedDevelopersPartner">
+                        <div ng-show="ctrl.developerConnections.isEmpty" id="noSelectedDevs">kein Bauunternehmen
+                            ausgewählt
+                        </div>
+                        <div id="selectedDevs">
+                            <div ng-hide="ctrl.developerConnections.isEmpty"
+                                 ng-repeat="dev in ctrl.developerConnections">
+                                <button type="button" class="colCountyDel pointer"
+                                        ng-click="ctrl.removeDeveloper(dev)"></button>
+                                <span class="colCountyName">{{dev.name}}</span>
+
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adminform_unit">
+                        <button type="button"
+                                class=" btn btn-primary adminform_unit"
+                                ng-click="ctrl.saveDeveloperConnections()"
+                                id="saveSelectedDevelopersPartner">
+                            Zuordnung Bauunternehmen speichern
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</tab>
+
+
+</tabset>
+</div>

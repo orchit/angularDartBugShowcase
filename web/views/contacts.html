@@ -1,0 +1,226 @@
+<link rel="stylesheet" href="/modules/mod_orchit_baumodul/tmpl/css/view_admin_company.css"/>
+<link rel="stylesheet" href="/modules/mod_orchit_baumodul/tmpl/css/view_companyListing.css"/>
+
+<div class="row-fluid" devmail-controller>
+<div class="span12">
+<h1>E-Mails an Ihr Unternehmen</h1>
+Hier finden Sie alle E-Mails, die Ihnen über unser System zugeschickt wurden, sowie alle dazugehörigen Kontaktdaten.
+<div class="row-fluid">
+    <div class="span4">
+        <div class="adminform_unit">
+            <div class="adminform_hd">Auswahl</div>
+            <div>
+                <div>Alle Nachrichten anzeigen?</div>
+                <div class='pull-left' ng-repeat="option in ctrl.radioShowAll">
+                    <label class='pull-left'>
+                        <input class='div-label' type="radio" value="{{option.value}}"  ng-model="ctrl.showAll">
+
+                        <div class="div-label text-label"> {{option.text}}</div>
+                    </label>
+
+                    <div class="clear"></div>
+                </div>
+                <div class='clear'></div>
+            </div>
+        </div>
+    </div>
+    <div class="span8 space-time">
+        <div class="adminform_unit" ng-show="ctrl.showAll=='filtered'">
+            <div class="adminform_unit">
+                Zeitraum auswählen:
+            </div>
+            <div class="row-fluid adminform_unit_half">
+                <div class="span5">
+                    <label>
+                        Monat:
+                        <select class="adminform_input_100_top contacts_select" ng-model="ctrl.selectedMonth">
+                            <option type="radio" ng-repeat="option in ctrl.selectableMonths"
+                                    value="{{option.value}}">{{option.text}}
+                            </option>
+                        </select>
+                    </label>
+                </div>
+                <div class="span5">
+                    <label>
+                        Jahr:
+                        <select class="adminform_input_100_top contacts_select" ng-model="ctrl.selectedYear">
+                            <option type="radio" ng-repeat="year in ctrl.selectableYears"
+                                    value="{{year}}">{{year}}
+                            </option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="adminform_unit">
+    <button focus class="btn btn-primary adminform_unit" type="button"
+            ng-click="ctrl.fetchMails()">aktualisieren
+    </button>
+</div>
+<div class="row-fluid space">
+    <div class="span12">
+        <div class="legendBG" id="legend-admin">
+            <span class="legend">Ihre E-Mails</span>
+        </div>
+        <div class="row-fluid">
+            <div class="span6 space-filters">
+                <div class="adminform_unit">
+                    <label for="select-filters">Filter:</label>
+                    <select class="adminform_input_50" ng-model="ctrl.currentFilter" name="filters"
+                            id="select-filters">
+                        <option ng-repeat="filter in ctrl.availableFilters" ng-value="filter">
+                            {{filter.name}}
+                        </option>
+                    </select>
+
+                    <button class="btn btn-primary" id="add-filters" type="button"
+                            ng-click="ctrl.addFilter(ctrl.currentFilter)">hinzufügen
+                    </button>
+                    <div class="clear"></div>
+                </div>
+                <div id="filters">
+                    <div ng-repeat="filter in ctrl.filterList" class="">
+                        <input type="text" ng-model="filter.value" class="input-filters pull-left"/>
+
+                        <div class="pull-left text-label-filters">{{filter.name}}</div>
+                        <button class="btn-delete delete-mails pull-left" ng-click="ctrl.removeFilter(filter)"
+                                title="Filter entfernen">&times;</button>
+                    </div>
+                </div>
+            </div>
+            <div class="span6 textRight">
+                <div>
+                    <a class="exporttxt" ng-show="ctrl.csvLinkData!=null" download="export.csv"
+                       href="{{ctrl.csvLinkData}}">CSV
+                        herunterladen</a>
+                </div>
+                <button class="btn btn-primary pull-right export" type="button" ng-click="ctrl.prepareExport()">
+                    CSV-Export
+                </button>
+            </div>
+        </div>
+        <table class="table table-striped table-admin">
+            <thead>
+            <tr>
+                <th></th>
+                <th class="table-hd-filters" ng-click="ctrl.changeSortBy('created')">Datum</th>
+                <th class="table-hd-filters" ng-click="ctrl.changeSortBy('fullName')">Name</th>
+                <th class="table-hd-filters" ng-click="ctrl.changeSortBy('email')">Email</th>
+                <th class="table-hd-filters" ng-click="ctrl.changeSortBy('intermediary')">Tippgeber</th>
+                <th class="table-hd-filters" ng-click="ctrl.changeSortBy('placeToBuild')">Bauort</th>
+                <th class="table-hd-filters" ng-click="ctrl.changeSortBy('city')">Standort</th>
+            </tr>
+            </thead>
+            <tfoot></tfoot>
+            <tbody>
+            <tr ng-repeat="mail in ctrl.filteredContactMails">
+                <td ng-click="ctrl.openContactDetail(mail)">
+                    <div class="contacts-plus"></div>
+                </td>
+                <td title="{{mail.created|date:'dd.MM.yyyy HH:mm:ss'}}">
+                    {{mail.created|date:'dd.MM.yyyy'}}
+                </td>
+                <td>{{mail.fullName}}</td>
+                <td>{{mail.email}}</td>
+                <td>{{mail.intermediary}}</td>
+                <td>{{mail.placeToBuild}}</td>
+                <td>{{mail.city}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="modal_bg"  ng-show="ctrl.detailContact!=null" ng-click="ctrl.closeDetails()"></div>
+        <div fixModalHeight toggleScrollbar ng-show="ctrl.detailContact!=null">
+            <div class="modal">
+                <div class="modal-header">
+                    <button class="close" ng-click="ctrl.closeDetails()">&times;</button>
+                    <h3 class="modal_label">
+                        Angaben des Benutzers
+                    </h3>
+                </div>
+                <div class="modal_body">
+                    <div class="modal_body_contacts">
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <div class="address">Anrede</div>
+                                {{ctrl.detailContact.salutation}}
+                                <div class="address">Name</div>
+                                {{ctrl.detailContact.fullName}}
+                                <span ng-show="ctrl.detailContact.street!=null&&ctrl.detailContact.city!=null">
+                                    <div class="address">Adresse</div>
+                                    <span ng-show="ctrl.detailContact.street!=null">{{ctrl.detailContact.street}}<br/></span>
+                                    <span ng-show="ctrl.detailContact.city!=null">{{ctrl.detailContact.city}}</span>
+                                </span>
+                                <div class="address">abgesendet</div>
+                                {{ctrl.detailContact.created|date:'dd.MM.yyyy HH:mm'}} Uhr
+                                <div class="address">E-Mail</div>
+                                <a href="mailto:{{ctrl.detailContact.email}}">{{ctrl.detailContact.email}}</a>
+                                <div class="address">Telefon</div>
+                                {{ctrl.detailContact.telephone}}
+                                <div class="address">Rückruf erwünscht</div>
+                                {{ctrl.detailContact.requestCallback|yesNo}}<span
+                                    ng-show="ctrl.detailContact.availability!=null">,</span>
+                                {{ctrl.detailContact.availability}}
+                            </div>
+                            <div class="span6">
+                                <div class="address">Baugrund ist vorhanden</div>
+                                {{ctrl.detailContact.hasBuildingGround|yesNo}}
+                                <span ng-show="ctrl.detailContact.placeToBuild!=null">
+                                    <div class="address">Bauort</div>
+                                    {{ctrl.detailContact.placeToBuild}}
+                                </span>
+                                <span ng-show="ctrl.detailContact.timeToBuild!=null">
+                                    <div class="address">Zeitpunkt</div>
+                                    {{ctrl.detailContact.timeToBuild}}
+                                </span>
+                                <div class="address">Beratungstermin erwünscht</div>
+                                {{ctrl.detailContact.requestAppointment|yesNo}}
+                                <span ng-show="ctrl.detailContact.comment!=null">
+                                    <div class="address">Bemerkungen</div>
+                                    {{ctrl.detailContact.comment}}
+                                </span>
+                                <div class="address">Newsletter erwünscht</div>
+                                {{ctrl.detailContact.wantsNewsletter|yesNo}}
+                                <span ng-show="ctrl.detailContact.intermediary!=null">
+                                    <div class="address">Referenz Ihres Mitarbeiters</div>
+                                    {{ctrl.detailContact.intermediary}} <span
+                                        ng-show="ctrl.detailContact.intermediaryEmail!=null">(</span>{{ctrl.detailContact.intermediaryEmail}}<span
+                                        ng-show="ctrl.detailContact.intermediaryEmail!=null">)</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <h4 class="modal_headline_contacts">Die letzte Hauskonfiguration des
+                                    Interessenten sah wie folgt aus</h4>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span4">
+                                <div class="address">Hausbezeichnung</div>
+                                {{ctrl.detailContact.houseName}}
+                            </div>
+                            <div class="span4">
+                                <div class="address">Variante</div>
+                                {{ctrl.detailContact.houseVariant}}
+                            </div>
+                            <div class="span4">
+                                <div class="address">Direktlink</div>
+                                <a  href="{{ctrl.detailContact.link}}" externalLink target="_blank">Link zum Hauskonfigurator</a>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span12 modal_image">
+                                <a  href="{{ctrl.detailContact.houseImageUrl}}" externalLink target="_blank"> <img height="340" ng-src="{{ctrl.detailContact.houseImageUrl}}"/></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

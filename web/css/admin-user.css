@@ -1,0 +1,357 @@
+@-webkit-viewport {
+  width: device-width;
+}
+@-moz-viewport {
+  width: device-width;
+}
+@-ms-viewport {
+  width: device-width;
+}
+@-o-viewport {
+  width: device-width;
+}
+@viewport {
+  width: device-width;
+}
+html,
+body {
+  background-color: #dddddd;
+}
+body {
+  font-size: 1em;
+}
+.sidebar-admin,
+.content-admin {
+  float: left;
+}
+.sidebar-admin {
+  width: 15%;
+}
+.sidebar-admin #logo-admin {
+  padding-top: 1.5em;
+  padding-left: 2.25em;
+  margin-bottom: 3em;
+}
+.sidebar-admin #nav-admin ul {
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0em;
+}
+.sidebar-admin #nav-admin ul li div {
+  background: url('/modules/mod_orchit_baumodul/admin/web/images/admin-sprite.png') no-repeat top left;
+  float: left;
+  margin-left: .5em;
+  margin-right: .5em;
+}
+.sidebar-admin #nav-admin ul li div:after {
+  clear: both;
+}
+.sidebar-admin #nav-admin ul li .sprite-admin-admin {
+  background-position: 0 0;
+  width: 40px;
+  height: 22px;
+}
+.sidebar-admin #nav-admin ul li .sprite-admin-content {
+  background-position: 0 -32px;
+  width: 40px;
+  height: 40px;
+}
+.sidebar-admin #nav-admin ul li .sprite-admin-reports {
+  background-position: 0 -82px;
+  width: 40px;
+  height: 40px;
+}
+.sidebar-admin #nav-admin ul li h2 {
+  text-transform: uppercase;
+  margin-top: 2em;
+  font-size: 1.2em;
+}
+.sidebar-admin #nav-admin ul li a {
+  padding-left: 2.75em;
+  display: block;
+  font-size: 1.15em;
+  -webkit-transition: background-color 0.5s ease;
+  -moz-transition: background-color 0.5s ease;
+  -o-transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease;
+}
+.sidebar-admin #nav-admin ul li a:hover,
+.sidebar-admin #nav-admin ul li a:focus {
+  background-color: #bbbbbb;
+  color: #ffffff;
+  background-image: url('/modules/mod_orchit_baumodul/admin/web/images/admin-arrow.png');
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+.sidebar-admin #nav-admin ul li .current-admin {
+  background-color: #bbbbbb;
+  color: #ffffff;
+  background-image: url('/modules/mod_orchit_baumodul/admin/web/images/admin-arrow.png');
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+.content-admin {
+  background-color: #ffffff;
+  padding-left: 3%;
+  margin-left: 0% !important;
+  width: 82%;
+  font-size: 1.1em;
+  min-height: 10em;
+  position: relative;
+  z-index: 1;
+}
+.content-admin .backlink-admin {
+  margin-right: 2em;
+}
+.content-admin .table-admin {
+  width: 96%;
+}
+.content-admin .table-admin td {
+  vertical-align: middle;
+}
+.content-admin #legend-admin {
+  width: 91%;
+}
+.content-admin .adminform_unit label {
+  font-size: 0.9em;
+}
+.content-admin .adminform_unit .div-label {
+  float: left;
+}
+.content-admin .text-label {
+  margin-left: .25em;
+  margin-right: 1.5em;
+}
+.content-admin .text-label-filters,
+.content-admin #add-filters {
+  margin-left: .5em;
+  margin-right: .5em;
+}
+.content-admin .space {
+  margin-top: 3em;
+}
+.content-admin .space-filters {
+  margin-bottom: 1em;
+}
+.content-admin .space-time {
+  margin-top: 1.5em;
+}
+.content-admin .adminform_unit_half {
+  margin-top: .1em;
+}
+.content-admin #filters {
+  margin-bottom: 2em;
+}
+.content-admin #filters .input-filters {
+  width: 41.7%;
+}
+.content-admin #select-filters {
+  margin-bottom: 1em;
+}
+.content-admin #add-filters {
+  margin-bottom: 1.2em;
+}
+.content-admin .export,
+.content-admin .exporttxt {
+  margin-top: 1.5em;
+}
+.content-admin .export {
+  margin-right: 4.5em;
+}
+.content-admin .exporttxt {
+  margin-right: 2.85em;
+}
+.content-admin .textRight {
+  text-align: right;
+}
+.content-admin h4 {
+  font-size: 1em;
+}
+.content-admin .table-hd-filters {
+  cursor: pointer;
+}
+.content-admin .table-hd-filters:hover,
+.content-admin .table-hd-filters:focus {
+  color: #ff9900;
+}
+.content-admin .contacts-plus {
+  background-image: url('/modules/mod_orchit_baumodul/admin/web/images/vcard.png');
+  display: block;
+  width: 40px;
+  height: 35px;
+  cursor: pointer;
+}
+.content-admin .contacts-plus:hover,
+.content-admin .contacts-plus:focus {
+  background-image: url('/modules/mod_orchit_baumodul/admin/web/images/vcardHover.png');
+}
+.content-admin .logout-admin {
+  background-color: #e74c3c;
+  border-bottom-color: #c0392b;
+}
+.content-admin .logout-admin:hover,
+.content-admin .logout-admin:focus {
+  background-color: #576771;
+  border-bottom-color: #43545e;
+}
+.content-admin .dashboard {
+  margin-top: 3em;
+}
+.content-admin .dashboard-item-container {
+  background-color: #eeeeee;
+  text-align: center;
+  color: #3e3e3e;
+  padding-bottom: 1em;
+  -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, color 0.5s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+.content-admin .dashboard-item-container:hover,
+.content-admin .dashboard-item-container:focus {
+  background-color: #ff9900;
+}
+.content-admin .dashboard-item-container:hover .dashboard-headline,
+.content-admin .dashboard-item-container:focus .dashboard-headline {
+  color: #ff9900;
+}
+.content-admin .dashboard-headline {
+  background-color: #576771;
+  color: #ffffff;
+  font-size: 1.25em;
+  text-transform: uppercase;
+  padding-top: .25em;
+  padding-bottom: .2em;
+  padding-left: .5em;
+  padding-right: .5em;
+}
+.content-admin .dashboard-image {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+.content-admin .dashboard-text {
+  margin-left: .5em;
+  margin-right: .5em;
+}
+.content-admin #preview-article {
+  width: 96%;
+  height: auto;
+}
+.content-admin .adminform_input_100_ns {
+  width: 96.5%;
+}
+.adminform_user {
+  list-style-type: none;
+  padding-left: 0em;
+  margin-top: -0.5em;
+  margin-left: 0;
+  width: 42.5% !important;
+  border: 1px solid #dddddd;
+  border-top: none;
+  border-bottom: 3px solid #dddddd;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 2;
+  background-color: #ffffff;
+}
+.adminform_user li {
+  cursor: pointer;
+  color: #576771;
+  line-height: 1.5;
+  padding-left: .5em;
+}
+.adminform_user li:hover,
+.adminform_user li:focus {
+  background-color: #576771;
+  color: #ff9900;
+}
+#useradmin {
+  min-height: 40em;
+}
+footer .sidebar-admin,
+.footer .sidebar-admin,
+footer .content-admin,
+.footer .content-admin {
+  height: 5em;
+  position: relative;
+  z-index: 0;
+}
+footer .sidebar-admin,
+.footer .sidebar-admin {
+  text-align: center;
+  padding-left: .5%;
+  padding-right: .5%;
+  width: 14%;
+  margin-top: 5em;
+}
+.ng-hide,
+.ng-cloak {
+  display: none !important;
+}
+.dashboard-container {
+  margin-right: 3em;
+}
+@media (max-width: 1700px) {
+  .sidebar-admin {
+    width: 20%;
+  }
+  .content-admin {
+    width: 77%;
+  }
+  footer .sidebar-admin,
+  .footer .sidebar-admin {
+    width: 19%;
+  }
+}
+@media (max-width: 1300px) and (min-width: 1050px) {
+  .sidebar-admin {
+    width: 23%;
+  }
+  .content-admin {
+    width: 74%;
+  }
+  footer .sidebar-admin,
+  .footer .sidebar-admin {
+    width: 22%;
+  }
+}
+@media (max-width: 1049px) and (min-width: 850px) {
+  .sidebar-admin {
+    width: 30%;
+  }
+  .content-admin {
+    width: 67%;
+  }
+  footer .sidebar-admin,
+  .footer .sidebar-admin {
+    width: 29%;
+  }
+}
+@media (max-width: 849px) and (min-width: 700px) {
+  .sidebar-admin {
+    width: 35%;
+  }
+  .content-admin {
+    width: 62%;
+  }
+  footer .sidebar-admin,
+  .footer .sidebar-admin {
+    width: 34%;
+  }
+}
+@media (max-width: 1300px) {
+  body {
+    font-size: 0.8em;
+  }
+  body .dashboard-image {
+    max-height: 100px;
+  }
+}
+@media (max-width: 1100px) {
+  body .dashboard-image {
+    max-height: 80px;
+  }
+}

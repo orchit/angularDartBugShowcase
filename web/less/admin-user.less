@@ -1,0 +1,412 @@
+@white: #FFFFFF;
+@black: #000;
+@grey: #DDDDDD;
+@white-grey: #EEE;
+@dark_grey: #BBB;
+@dark_blue: #576771;
+@darker-blue: #43545e;
+@orange: #ff9900;
+@dark_orange: #e98e00;
+@darker_grey: #3e3e3e;
+@light_grey: #9e9e9e;
+@red: #e74c3c;
+@dark-red: #c0392b;
+
+@font-size: 1em;
+@line-height: 1.5;
+@font-color: @darker_grey;
+@font-color-alternative: #6e6e6e;
+
+@ease: .5s;
+
+@border-radius: 4px;
+
+@fadeIn: @orange;
+@fadeOut: @dark_blue;
+@fadeInInverted: @fadeOut;
+@fadeOutInverted: @fadeIn;
+
+@-webkit-viewport {
+  width: device-width;
+}
+
+@-moz-viewport {
+  width: device-width;
+}
+
+@-ms-viewport {
+  width: device-width;
+}
+
+@-o-viewport {
+  width: device-width;
+}
+
+@viewport {
+  width: device-width;
+}
+
+html, body {
+  background-color: @grey;
+}
+
+body {
+  font-size: @font-size;
+}
+
+.sidebar-admin, .content-admin {
+  float: left;
+}
+
+.sidebar-admin {
+  width: 15%;
+  #logo-admin {
+    padding-top: 1.5em;
+    padding-left: 2.25em;
+    margin-bottom: 3em;
+  }
+  #nav-admin {
+    ul {
+      list-style-type: none;
+      margin-left: 0;
+      padding-left: 0em;
+      li {
+        div {
+          background: url('/modules/mod_orchit_baumodul/admin/web/images/admin-sprite.png') no-repeat top left;
+          float: left;
+          margin-left: .5em;
+          margin-right: .5em;
+          &:after {
+            clear: both;
+          }
+        }
+        .sprite-admin-admin {
+          background-position: 0 0;
+          width: 40px;
+          height: 22px;
+        }
+        .sprite-admin-content {
+          background-position: 0 -32px;
+          width: 40px;
+          height: 40px;
+        }
+        .sprite-admin-reports {
+          background-position: 0 -82px;
+          width: 40px;
+          height: 40px;
+        }
+        h2 {
+          text-transform: uppercase;
+          margin-top: 2em;
+          font-size: @font-size + .2em;
+        }
+        a {
+          padding-left: 2.75em;
+          display: block;
+          font-size: @font-size + .15em;
+          -webkit-transition: background-color @ease ease;
+          -moz-transition: background-color @ease ease;
+          -o-transition: background-color @ease ease;
+          transition: background-color @ease ease;
+          &:hover, &:focus {
+            background-color: @dark_grey;
+            color: @white;
+            background-image: url('/modules/mod_orchit_baumodul/admin/web/images/admin-arrow.png');
+            background-repeat: no-repeat;
+            background-position: center right;
+          }
+        }
+        .current-admin {
+          background-color: @dark_grey;
+          color: @white;
+          background-image: url('/modules/mod_orchit_baumodul/admin/web/images/admin-arrow.png');
+          background-repeat: no-repeat;
+          background-position: center right;
+        }
+      }
+    }
+  }
+}
+
+.content-admin {
+  background-color: @white;
+  padding-left: 3%;
+  margin-left: 0% !important;
+  width: 82%;
+  font-size: @font-size + .1em;
+  min-height: 10em;
+  position: relative;
+  z-index: 1;
+  .backlink-admin {
+    margin-right: 2em;
+  }
+  .table-admin {
+    width: 96%;
+    td {
+      vertical-align: middle;
+    }
+  }
+  #legend-admin {
+    width: 91%;
+  }
+  .adminform_unit {
+    label {
+      font-size: @font-size - .1em;
+    }
+    .div-label {
+      float: left;
+    }
+  }
+  .text-label {
+    margin-left: .25em;
+    margin-right: 1.5em;
+  }
+  .text-label-filters, #add-filters {
+    margin-left: .5em;
+    margin-right: .5em;
+  }
+  .space {
+    margin-top: 3em;
+  }
+  .space-filters {
+    margin-bottom: 1em;
+  }
+  .space-time {
+    margin-top: 1.5em;
+  }
+  .adminform_unit_half {
+    margin-top: .1em;
+  }
+  .delete-mails {
+
+  }
+  #filters {
+    margin-bottom: 2em;
+    .input-filters {
+      width: 41.7%;
+    }
+  }
+  #select-filters {
+    margin-bottom: 1em;
+  }
+  #add-filters {
+    margin-bottom: 1.2em;
+  }
+  .export, .exporttxt {
+    margin-top: 1.5em;
+  }
+  .export {
+    margin-right: 4.5em;
+  }
+  .exporttxt {
+    margin-right: 2.85em;
+  }
+  .textRight {
+    text-align: right;
+  }
+  h4 {
+    font-size: @font-size;
+  }
+  .table-hd-filters {
+    cursor: pointer;
+    &:hover, &:focus {
+      color: @orange;
+    }
+  }
+  .contacts-plus {
+    background-image: url('/modules/mod_orchit_baumodul/admin/web/images/vcard.png');
+    display: block;
+    width: 40px;
+    height: 35px;
+    cursor: pointer;
+    &:hover, &:focus {
+      background-image: url('/modules/mod_orchit_baumodul/admin/web/images/vcardHover.png');
+    }
+  }
+  .logout-admin {
+    background-color: @red;
+    border-bottom-color: @dark-red;
+    &:hover, &:focus {
+      background-color: @dark_blue;
+      border-bottom-color: @darker-blue;
+    }
+  }
+  .dashboard {
+    margin-top: 3em;
+  }
+  .dashboard-item-container {
+    background-color: @white-grey;
+    text-align: center;
+    color: @font-color;
+    padding-bottom: 1em;
+    -webkit-transition: background-color @ease ease, color @ease ease;
+    -moz-transition: background-color @ease ease, color @ease ease;
+    -o-transition: background-color @ease ease, color @ease ease;
+    transition: background-color @ease ease, color @ease ease;
+    &:hover, &:focus {
+      background-color: @orange;
+      .dashboard-headline {
+        color: @orange;
+      }
+    }
+  }
+  .dashboard-headline {
+    background-color: @dark_blue;
+    color: @white;
+    font-size: @font-size + .25em;
+    text-transform: uppercase;
+    padding-top: .25em;
+    padding-bottom: .2em;
+    padding-left: .5em;
+    padding-right: .5em;
+  }
+  .dashboard-image {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+  .dashboard-text {
+    margin-left: .5em;
+    margin-right: .5em;
+  }
+  #preview-article {
+    width: 96%;
+    height: auto;
+  }
+  .adminform_input_100_ns {
+    width: 96.5%;
+  }
+}
+.adminform_user {
+  list-style-type: none;
+  padding-left: 0em;
+  margin-top: -.5em;
+  margin-left: 0;
+  width: 42.5% !important;
+  border: 1px solid @grey;
+  border-top: none;
+  border-bottom: 3px solid @grey;
+  -webkit-border-radius: @border-radius;
+  -moz-border-radius: @border-radius;
+  -o-border-radius: @border-radius;
+  border-radius: @border-radius;
+  position: absolute;
+  z-index: 2;
+  background-color: @white;
+  li {
+    cursor: pointer;
+    color: @dark_blue;
+    line-height: @line-height;
+    padding-left: .5em;
+    &:hover, &:focus {
+      background-color: @dark_blue;
+      color: @orange;
+    }
+  }
+}
+#useradmin {
+  min-height: 40em;
+}
+
+footer, .footer {
+  .sidebar-admin, .content-admin {
+    height: 5em;
+    position: relative;
+    z-index: 0;
+  }
+  .sidebar-admin {
+    text-align: center;
+    padding-left: .5%;
+    padding-right: .5%;
+    width: 14%;
+    margin-top: 5em;
+  }
+}
+
+.ng-hide, .ng-cloak {
+  display: none !important;
+}
+
+.dashboard-container {
+  margin-right: 3em;
+}
+
+@media (max-width: 1700px) {
+  .sidebar-admin {
+    width: 20%;
+  }
+
+  .content-admin {
+    width: 77%;
+  }
+
+  footer, .footer {
+    .sidebar-admin {
+      width: 19%;
+    }
+  }
+}
+
+@media (max-width: 1300px) and (min-width: 1050px) {
+  .sidebar-admin {
+    width: 23%;
+  }
+
+  .content-admin {
+    width: 74%;
+  }
+
+  footer, .footer {
+    .sidebar-admin {
+      width: 22%;
+    }
+  }
+}
+
+@media (max-width: 1049px) and (min-width: 850px) {
+  .sidebar-admin {
+    width: 30%;
+  }
+
+  .content-admin {
+    width: 67%;
+  }
+
+  footer, .footer {
+    .sidebar-admin {
+      width: 29%;
+    }
+  }
+}
+
+@media (max-width: 849px) and (min-width: 700px) {
+  .sidebar-admin {
+    width: 35%;
+  }
+
+  .content-admin {
+    width: 62%;
+  }
+
+  footer, .footer {
+    .sidebar-admin {
+      width: 34%;
+    }
+  }
+}
+
+@media(max-width: 1300px) {
+  body {
+    font-size: @font-size - .2em;
+    .dashboard-image {
+      max-height: 100px;
+    }
+  }
+}
+
+@media(max-width: 1100px) {
+  body {
+    .dashboard-image {
+      max-height: 80px;
+    }
+  }
+}

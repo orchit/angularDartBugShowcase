@@ -1,0 +1,9 @@
+<div id="messageContainer" ng-show="cmp.config.showMessage"
+     ng-class="{'info':'alert-info','error':'alert-error','success':'alert-success'}[cmp.config.type]"
+     class="alert">
+    <button class="close closeMessageAdminPanel" ng-click="cmp.hideMessage()" type="button">&times;</button>
+    <div id="messageHeadline" ng-if="cmp.config.headerMessage!=null">{{cmp.config.headerMessage}}</div>
+    <div id="messageContent">{{cmp.config.message}}</div>
+    <div ng-if="cmp.config.actions.length==0" ng-click="cmp.hideMessage()" class="btn btn-primary adminform_unit closeMessageAdminPanel">Schließen</div>
+    <div ng-repeat="action in cmp.config.actions" ng-click="cmp.execute(action)" class="btn btn-primary adminform_unit btn-message">{{action.caption}}</div>
+</div>

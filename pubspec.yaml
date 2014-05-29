@@ -1,0 +1,33 @@
+name: admin
+author: orchit GmbH
+version: 1.0.0
+homepage: http://orchit.de
+description: the dart apps for baumyhaus admin area
+dependencies:
+  angular: any
+  intl: any
+  browser: any
+  js: any
+  shadow_dom: any
+  angular_ui: any
+transformers:
+  - angular:
+      html_files:
+        - web/index.html
+        - web/views/contacts.html
+        - web/views/dashboard.html
+        - web/views/developer.html
+        - web/views/news.html
+        - web/views/partner.html
+        - web/views/service.html
+        - web/views/userAdmin.html
+        - packages/admin/zipCodeAssignment/zipCodeAssignment.html
+        - packages/admin/messages/messages.html
+  - $dart2js:
+      checked: false
+      minify: true
+      verbose: true
+      analyzeAll: false
+      suppressWarnings: false
+      suppressHints: false
+      terse: false

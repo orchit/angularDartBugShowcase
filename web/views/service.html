@@ -1,0 +1,197 @@
+<link rel="stylesheet" type="text/css" href="/modules/mod_orchit_baumodul/tmpl/css/view_article_admin.css"/>
+<link rel="stylesheet" type="text/css" href="/modules/mod_orchit_baumodul/tmpl/css/view_admin_company.css"/>
+<link rel="stylesheet" href="/modules/mod_orchit_baumodul/tmpl/css/messageAdminPanel.css"/>
+<link rel="stylesheet" type="text/css" href="/modules/mod_orchit_baumodul/tmpl/css/view_news_service.css"/>
+
+<div service-controller>
+
+<messages config="ctrl.messageConfig"></messages>
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="adminform_unit">
+                <h1>
+                    Service-Artikel verwalten
+                </h1>
+
+                <div class="adminform_hd">
+                    Artikel auswählen
+                </div>
+                <select ng-model="ctrl.selectedArticleId" name="article" id="article" class="adminform_input_100_ns">
+                    <option value="">Neuer Artikel</option>
+                    <option ng-repeat="article in ctrl.existingArticles" ng-value="article.id">{{article.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr class="divider-admin"/>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="adminform_unit">
+                <div>
+                    Autor auswählen
+                </div>
+                <select ng-model="ctrl.article.authorType" ng-change="ctrl.changeAuthorType()" name="authorType"
+                        id="authorType" class="adminform_input_100_top">
+                    <option ng-value="0" selected="selected">Bauunternehmen</option>
+                    <option ng-value="1">Werbepartner</option>
+                    <option ng-value="2">BAUmyHAUS</option>
+                    <option ng-value="3">X-Optimax</option>
+                </select>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="adminform_unit">
+                <div class="hidden-headline">
+                    Unternehmen auswählen
+                </div>
+                <select ng-model="ctrl.article.authorId" ng-show="ctrl.article.needsAuthor()"
+                        ng-change="ctrl.changeAuthorId()" name="author" id="author" class="adminform_input_100_top">
+                    <option value="">Bitte {{ctrl.getAuthorTypeDescription()}} auswählen</option>
+                    <option ng-repeat="author in ctrl.authorList" ng-value="author.id">{{author.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="adminform_unit">
+                <div>
+                    Inhalt auswählen
+                </div>
+                <select ng-model="ctrl.article.contentId" ng-change="ctrl.changeArticleContent()" name="content"
+                        id="content" class="adminform_input_100_top">
+                    <option value="">Bitte auswählen</option>
+                    <option ng-repeat="content in ctrl.contentList" ng-value="content.id">{{content.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="adminform_unit">
+                <div>
+                    Weiterlesen-Link
+                </div>
+                <input ng-model="ctrl.article.readMoreLink" name="link" id="link" type="url" class="adminform_input"/>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="adminform_unit">
+                <input type="checkbox" id="consent" class="pull-left" ng-checked="consent" ng-change="consent = !consent" />
+                <label for="consent" class="adminform_label pull-left">Hiermit erkläre ich, dass alle beteiligten Personen
+                    mit der Veröffentlichung des Artikels einverstanden sind</label>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="adminform_unit">
+                <button type="button" ng-disabled="ctrl.article.isInvalid() || !consent" ng-click="ctrl.saveArticle()" id="saveBtn"
+                        class="btn btn-primary adminform_unit">Speichern
+                </button>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="adminform_unit">
+                <button type="button" ng-disabled="ctrl.article.id==null" ng-click="ctrl.openDeleteMessage()"
+                        id="deleteBtn"
+                        class="btn btn-primary adminform_unit">Löschen
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="preview-article">
+        <div class="row-fluid">
+            <div class="articleEntry span12">
+                <div class="row-fluid" ng-show="ctrl.isDevPartner">
+                    <div class="span12">
+                        <div class="companyTitle" id="companyTitle">{{ctrl.articleAuthor.name}}
+                        </div>
+                        <div class="address_invert">Veröffentlicht: <span
+                                id="published">{{ctrl.articleContent.start}}</span> Uhr
+                            <span ng-show="ctrl.articleContent.hasAuthor()" id="authorContent">/ Autor: {{ctrl.articleContent.author}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid" ng-show="ctrl.isDevPartner">
+                    <div class="span3">
+                        <div class="companyImageContainer">
+                            <a href="{{ctrl.articleAuthor.uri}}" target="_blank">
+                                <img ng-src="{{ctrl.articleAuthor.image}}" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="span3" id="address" ng-show="ctrl.articleAuthor.hasAddress()">
+                        <div class="address">Adresse</div>
+                        <div class="valueText">
+                            <span id="streetName">
+                                {{ctrl.articleAuthor.streetName}}
+                            </span>
+                            <span id="streetNumber">
+                                {{ctrl.articleAuthor.streetNumber}}
+                            </span>
+                        </div>
+                        <div class="valueText">
+                            <span id="zipcode">
+                                {{ctrl.articleAuthor.zipcode}}
+                            </span>
+                            <span id="city">
+                                {{ctrl.articleAuthor.city}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="span3" id="telephon" ng-show="ctrl.articleAuthor.hasTelephone()">
+                        <div class="address">Telefon</div>
+                        <div class="valueText" id="tel">{{ctrl.articleAuthor.tel}}</div>
+                    </div>
+                    <div class="span3" id="url" ng-show="ctrl.articleAuthor.hasMailUri()">
+                        <div class="address">E-Mail & Internet</div>
+                        <div class="valueText">
+                            <a href="mailto:{{ctrl.articleAuthor.mail}}" id="mail">
+                                {{ctrl.articleAuthor.mail}}
+                            </a>
+                        </div>
+                        <div class="valueText">
+                            <a ng-href="{{ctrl.articleAuthor.uri}}" target="_blank" id="uri">
+                                {{ctrl.articleAuthor.uri}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-fluid" ng-show="!ctrl.isDevPartner">
+                    <div class="span8">
+                        <div class="companyTitle">{{ctrl.articleAuthor.name}}
+                        </div>
+                        <div class="address_invert">Veröffentlicht: <span>{{ctrl.articleContent.start}}</span> Uhr
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="companyImageContainer">
+                            <a href="{{ctrl.articleAuthor.uri}}" target="_blank" id="uriImg">
+                                <img ng-src="{{ctrl.articleAuthor.image}}" id="image"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nsContainer row-fluid">
+                    <div class="span12">
+                        <h3 class="nsTitleContainer" id="nsTitle">
+                            {{ctrl.articleContent.title}}
+                        </h3>
+                        <div class="nsTextContainer" id="nsMessage" absolutify ng-bind-html-unsafe="ctrl.articleContent.message">
+                        </div>
+                        <a ng-show="ctrl.article.hasReadMoreLink()" class="pull-right padding-right" target="_blank"
+                           ng-href="{{ctrl.article.readMoreLink}}" id="moreLink">
+                            weiterlesen &rarr;
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

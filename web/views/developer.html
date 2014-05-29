@@ -1,0 +1,314 @@
+<link rel="stylesheet" href="/modules/mod_orchit_baumodul/tmpl/css/view_admin_company.css"/>
+<link rel="stylesheet" href="/modules/mod_orchit_baumodul/tmpl/css/messageAdminPanel.css"/>
+
+<div id="developerAdminArea" developer-admin>
+<messages config="devCtrl.messageConfig"></messages>
+
+<div id="editDeveloper">
+    <div id="editDeveloperHead">
+        <h1>
+            Administration Bauunternehmen
+        </h1>
+
+        <select class="adminform_input_50_top_2" ng-model="devCtrl.currentId"
+                id="frmAddDeveloperSelectDeveloper">
+            <option value="">Bauunternehmen auswählen oder Formular zurücksetzen</option>
+            <option ng-repeat="dev in devCtrl.developers" ng-value="dev.id">{{dev.name}}
+            </option>
+        </select>
+
+        <div class="clear"></div>
+    </div>
+</div>
+
+<tabset justified="true" class="adminform_unit">
+<tab heading="Bearbeiten" id="editDeveloperBase">
+<div class="row-fluid">
+    <div class="span6">
+        <div class="adminform_unit">
+            <div>Firma</div>
+            <input type="text" class="adminform_input" ng-model="devCtrl.currentDeveloper.name"
+                   id="inputDeveloperName"
+                   placeholder="Ihre Firma">
+        </div>
+        <div class="adminform_unit">
+            <div>Straße / Hausnummer</div>
+            <input type="text" class="adminform_input_50" ng-model="devCtrl.currentDeveloper.streetName"
+                   id="inputDeveloperStreetName" placeholder="Straße">
+            <input type="text" class="adminform_input_50" ng-model="devCtrl.currentDeveloper.streetNumber"
+                   id="inputDeveloperStreetNumber" placeholder="1a">
+        </div>
+        <div class="adminform_unit">
+            <div>Postleitzahl / Ort</div>
+            <input type="text" class="adminform_input_50" ng-model="devCtrl.currentDeveloper.zipCode"
+                   id="inputDeveloperZipcode" placeholder="10000">
+            <input type="text" class="adminform_input_50" id="inputDeveloperCity"
+                   ng-model="devCtrl.currentDeveloper.city"
+                   placeholder="Berlin">
+        </div>
+        <div class="adminform_unit">
+            <div>E-Mail Adresse</div>
+            <input type="email" class="adminform_input" id="inputDeveloperMail"
+                   ng-model="devCtrl.currentDeveloper.mail"
+                   placeholder="info@yourpage.com">
+        </div>
+        <div class="adminform_unit">
+            <div>Homepage</div>
+            <input type="url" class="adminform_input" id="inputDeveloperUri"
+                   ng-model="devCtrl.currentDeveloper.uri"
+                   placeholder="http://www.yourpage.com">
+        </div>
+        <div class="adminform_unit">
+            <div>Telefonnummer</div>
+            <input type="text" class="adminform_input" id="inputDeveloperTel"
+                   ng-model="devCtrl.currentDeveloper.telephone"
+                   placeholder="+49 (0)30 123123-1">
+        </div>
+        <div class="adminform_unit">
+            <div>Telefaxnummer</div>
+            <input type="text" class="adminform_input" id="inputDeveloperFax"
+                   ng-model="devCtrl.currentDeveloper.fax"
+                   placeholder="+49 (0)30 123123-2">
+        </div>
+        <div class="adminform_unit">
+            <div>Bauart</div>
+            <select ng-model="devCtrl.currentDeveloper.style"
+                    class="adminform_input_100_top">
+                <option value="">Bauart auswählen</option>
+                <option ng-repeat="style in devCtrl.styles" ng-value="style.id">{{style.name}}</option>
+            </select>
+        </div>
+
+        <div class="adminform_unit">
+            <label class="checkbox adminform_unit">
+                <input
+                        type="checkbox"
+                        ng-model="devCtrl.currentDeveloper.showGlobals"
+                        name="inputPartnerGlobal"
+                        hint="Globale Werbepartner auf der Premiumseite anzeigen"
+                        id="inputPartnerGlobal"
+                        class="adminform_unit"/>
+                <span id="inputPartnerGlobalText"> globale Werbepartner anzeigen auf der Premiumseite</span></label>
+        </div>
+    </div>
+    <div class="span6">
+        <div class="adminform_unit">
+            <div>Beschreibung / Notiz</div>
+            <div>
+                <textarea id="inputDeveloperDesc" class="adminform_textarea"
+                          ng-model="devCtrl.currentDeveloper.description"
+                          placeholder="Beschreibung als Freitext"></textarea>
+            </div>
+        </div>
+        <div class="adminform_unit" ng-show="devCtrl.currentDeveloper.id != null">
+            <div>Link zur Premiumseite</div>
+            <a id="devLink" href="{{baseCtrl.baseUri}}/#!d_dev={{devCtrl.currentDeveloper.id}}">{{baseCtrl.baseUri}}/#!d_dev={{devCtrl.currentDeveloper.id}}</a>
+        </div>
+        <div id="editDeveloperLogo">
+            <div class="adminform_unit">
+                <div ng-show="devCtrl.previewUrl==null">Aktuelles Logo</div>
+                <div ng-show="devCtrl.previewUrl!=null">Neues Logo</div>
+                <div class="address_invert">Breite: flexibel, max. 300 Pixel // Höhe: exakt 100 Pixel</div>
+                <img id="actLogoDeveloper" class="img-logo"
+                     ng-show="devCtrl.previewUrl==null && devCtrl.currentDeveloper.id!=null"
+                     ng-src="{{devCtrl.currentDeveloper.image}}">
+
+                <img id="newLogoDeveloper" class="img-logo" ng-show="devCtrl.previewUrl!=null"
+                     ng-src="{{devCtrl.previewUrl}}">
+            </div>
+            <div class="adminform_unit">
+                <div>Logo hochladen</div>
+                <input type="file" class="adminform_input" ng-model="devCtrl.images"
+                       id="uploadDeveloperImage">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Vorschau -->
+<div id="adminform_descriptionDeveloper" class="adminform_description row-fluid">
+    <div class="span12">
+        <h2 class="adminform_hd"> Vorschau Unternehmensvisitenkarte:</h2>
+
+        <div class="row-fluid">
+            <div class="developerInfo span4">
+                <img id="infoImageDeveloper" ng-src="{{devCtrl.currentDeveloper.image}}"
+                     ng-show="devCtrl.previewUrl==null"
+                     alt="">
+                <img id="newLogoInfoDeveloper" class="img-logo" ng-show="devCtrl.previewUrl!=null"
+                     ng-src="{{devCtrl.previewUrl}}">
+
+                <div id="developerInfoName">{{devCtrl.currentDeveloper.name}}</div>
+                <div class="developerAdress marginTopBottom">
+                    <div class="address">Adresse</div>
+                    <div id="developerInfoAddress">{{devCtrl.currentDeveloper.streetName}}
+                        {{devCtrl.currentDeveloper.streetNumber}}<br>{{devCtrl.currentDeveloper.zipCode}}
+                        {{devCtrl.currentDeveloper.city}}
+                    </div>
+                </div>
+                <div class="marginTopBottom">
+                    <div class="address">Telefon</div>
+                    <div id="developerInfoPhone">{{devCtrl.currentDeveloper.telephone}}</div>
+                </div>
+                <div id="developerInfoFaxContainer" class="marginTopBottom">
+                    <div class="address">Fax</div>
+                    <div id="developerInfoFax">{{devCtrl.currentDeveloper.fax}}</div>
+                </div>
+                <div class="marginTopBottom">
+                    <div class="address">E-Mail</div>
+                    <a id="developerInfoMail"
+                       href="mailto:{{devCtrl.currentDeveloper.mail}}">{{devCtrl.currentDeveloper.mail}}</a>
+
+                    <div class="address">Internet</div>
+                    <a id="developerInfoUrl" href="{{devCtrl.currentDeveloper.uri}}" target="_blank">{{devCtrl.currentDeveloper.uri}}</a>
+                </div>
+            </div>
+            <div class="developerInfo span8">
+                <h4>Informationen zum Bauunternehmen</h4>
+
+                <div id="developerInfoDescription"
+                     ng-bind-html="devCtrl.currentDeveloper.description|formatText"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="adminform_description row-fluid">
+    <div class="span6">
+        <div class="adminform_hd adminform_units">Ansprechpartner des Bauunternehmens</div>
+        <div class="adminform_unit">
+            <div>Name</div>
+            <input type="text" class="adminform_input" id="inputDeveloperContactName"
+                   ng-model="devCtrl.currentDeveloper.contactName"
+                   placeholder="Name des Ansprechpartners">
+        </div>
+        <div class="adminform_unit">
+            <div>Telefonnummer</div>
+            <input type="text" class="adminform_input" id="inputDeveloperContactTel"
+                   ng-model="devCtrl.currentDeveloper.contactTelephone"
+                   placeholder="Telefonnummer des Ansprechpartners">
+        </div>
+        <div class="adminform_unit">
+            <div>Mobilfunknummer</div>
+            <input type="text" class="adminform_input" id="inputDeveloperMob"
+                   ng-model="devCtrl.currentDeveloper.mobile"
+                   placeholder="+49 (0)170 100100 10">
+        </div>
+        <div class="adminform_unit">
+            <div>E-Mail-Adresse</div>
+            <input type="text" class="adminform_input" id="inputDevelperContactMail"
+                   ng-model="devCtrl.currentDeveloper.contactEmail"
+                   placeholder="E-Mail Adresse des Ansprechpartners">
+        </div>
+        <div class="adminform_unit">
+            <div>Status</div>
+            <select class="adminform_input_100_top"
+                    ng-model="devCtrl.currentDeveloper.status">
+                <option ng-repeat="status in devCtrl.currentDeveloper.availableStatuses" ng-value="status.id">
+                    {{status.name}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="span6">
+        <div class="adminform_hd adminform_units">Vertriebsstruktur</div>
+        <div class="adminform_unit">
+            <div>Vertriebsstruktur auswählen</div>
+            <select class="adminform_input_100_top"
+                    ng-model="devCtrl.currentDeveloper.salesStructureId">
+                <option ng-repeat="struct in devCtrl.salesStructures" ng-value="struct.id">{{struct.name}}
+                </option>
+            </select>
+        </div>
+        <div class="adminform_unit_2">
+            <div>Name des Vertriebsmitarbeiters</div>
+            <input type="text" class="adminform_input" id="inputDevelperSalesStructureContactName"
+                   ng-model="devCtrl.currentDeveloper.salesStructureContactName"
+                   placeholder="Name des Ansprechpartners">
+        </div>
+        <div class="adminform_unit">
+            <div>Telefonnummer des Vertriebsmitarbeiters</div>
+            <input type="text" class="adminform_input" id="inputDevelperSalesStructureContactTelephone"
+                   ng-model="devCtrl.currentDeveloper.salesStructureContactTelephone"
+                   placeholder="Telefonnummer des Ansprechpartners">
+        </div>
+        <div class="adminform_unit">
+            <div>E-Mail-Adresse des Vertriebsmitarbeiters</div>
+            <input type="text" class="adminform_input" id="inputDevelperSalesStructureContactMail"
+                   ng-model="devCtrl.currentDeveloper.salesStructureContactEmail"
+                   placeholder="E-Mail Adresse des Ansprechpartners">
+        </div>
+    </div>
+
+</div>
+<div class="row-fluid">
+    <div class="span6">
+        <div class="adminform_units">
+            <button type="button" id="frmAddDeveloperBtnSave" ng-click="devCtrl.save()"
+                    class="btn btn-primary adminform_unit">
+                Bauunternehmen speichern
+            </button>
+        </div>
+    </div>
+    <div class="span6">
+        <div class="adminform_units">
+            <button type="button" id="resetFormDeveloper" class="btn btn-primary pull-right margin-right"
+                    ng-click="devCtrl.currentId = null">
+                Bauunternehmen zurücksetzen
+            </button>
+        </div>
+    </div>
+</div>
+</tab>
+<tab heading="Mit PLZ verknüpfen" id="developerConnector" class="developerConnection" ng-if="devCtrl.currentId!=null">
+    <h2>Bauunternehmen {{devCtrl.currentDeveloper.name}} mit
+        Postleitzahlen verknüpfen:
+    </h2>
+    <zipCodeAssignment parentId="devCtrl.currentDeveloper.id" saveType="58" getConnectionsType="59"></zipCodeAssignment>
+</tab>
+<tab heading="Deutschlandportal" id="partnerConnector" class="developerConnection" ng-if="devCtrl.currentId!=null">
+    <div class="row-fluid">
+        <div class="span12">
+            <h2>
+                Werbepartner für das Deutschlandportal freischalten:
+            </h2>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span5">
+            <div class="listBody">
+                <div class="adminform_hd adminform_unit">Nur Premium</div>
+                <div class="adminform_unit border_bottom" ng-repeat="partner in devCtrl.partnersForPremium"><span
+                        class="adminform_hd">{{$index + 1}}.</span> {{partner.name}}
+                    <button type="button"
+                            ng-click="devCtrl.partnersForPremium.remove(partner);devCtrl.partnersForBoth.add(partner);"
+                            class="add_admin_panel add_admin_panel_left"> &gt;
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="span1"></div>
+        <div class="span6">
+            <div class="listBody">
+                <div class="adminform_hd adminform_unit">Öffentlich und Premium</div>
+                <div class="adminform_unit border_bottom" ng-repeat="partner in devCtrl.partnersForBoth">
+                    <button type="button"
+                            ng-click="devCtrl.partnersForPremium.add(partner);devCtrl.partnersForBoth.remove(partner);"
+                            class="add_admin_panel add_admin_panel_right"> &lt;
+                    </button>
+                    <span class="adminform_hd">{{$index + 1}}.</span> {{partner.name}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="adminform_unit">
+                <button type="button" class="btn btn-primary adminform_unit"
+                        ng-click="devCtrl.updateConnections()">
+                    Zuordnung speichern
+                </button>
+            </div>
+        </div>
+    </div>
+</tab>
+</tabset>
+</div>

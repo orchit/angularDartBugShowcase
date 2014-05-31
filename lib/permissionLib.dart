@@ -25,9 +25,12 @@ class PermissionsController {
   PermissionsController(){
     var url = "/modules/mod_orchit_baumodul/ajax/getByInput_Admin.php?type=43";
     // call the web server asynchronously
-    var request = HttpRequest.getString(url)
-    .then(_permissionsLoaded)
-    .catchError(processHttpRequestError);
+    //var request = HttpRequest.getString(url)    .then(_permissionsLoaded)    .catchError(processHttpRequestError);
+    //Mock server
+    new Timer(new Duration(milliseconds:10), () {
+      _permissionsLoaded('["reportsSection","contactsLink","adminSection","developerLink","partnerLink","userAdminLink","contentSection","newsLink","serviceLink","assignDevelopersToPartnerDiv","assignUsersToSalesStructDiv"]');
+    });
+
   }
 
   void addListener(PermissionListChangedCallback callback){

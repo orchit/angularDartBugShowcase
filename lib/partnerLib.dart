@@ -2,6 +2,7 @@ library partner;
 
 import 'dart:html';
 import 'dart:convert';
+import 'dart:async';
 import 'dartUtilLib.dart';
 import 'package:angular/angular.dart';
 import 'CommonEntityAdminLib.dart';
@@ -118,38 +119,58 @@ class PartnerAdminController {
   void _loadStates() {
     var url = "/modules/mod_orchit_baumodul/ajax/getByInput_Admin.php?type=56";
     // call the web server asynchronously
-    HttpRequest.getString(url).then(_statesLoaded).catchError(handleHttpErrorGeneric);
+    //HttpRequest.getString(url).then(_statesLoaded).catchError(handleHttpErrorGeneric);
+    //Mock server
+    new Timer(new Duration(milliseconds:10), () {
+      _statesLoaded('[{"id":"13","name":"Baden-W\u00fcrttemberg"},{"id":"11","name":"Bayern"},{"id":"14","name":"Berlin"},{"id":"24","name":"Brandenburg"},{"id":"17","name":"Bremen"},{"id":"25","name":"Hamburg"},{"id":"23","name":"Hessen"},{"id":"19","name":"Mecklenburg-Vorpommern"},{"id":"12","name":"Niedersachsen"},{"id":"21","name":"Nordrhein-Westfalen"},{"id":"15","name":"Rheinland-Pfalz"},{"id":"16","name":"Saarland"},{"id":"18","name":"Sachsen"},{"id":"20","name":"Sachsen-Anhalt"},{"id":"10","name":"Schleswig-Holstein"},{"id":"22","name":"Th\u00fcringen"}]');
+    });
   }
 
 
   void _loadPartnerList() {
     var url = "/modules/mod_orchit_baumodul/ajax/getByInput_Admin.php?type=54";
     // call the web server asynchronously
-    HttpRequest.getString(url).then(_partnersLoaded).catchError(handleHttpErrorGeneric);
+    //HttpRequest.getString(url).then(_partnersLoaded).catchError(handleHttpErrorGeneric);
+    //Mock server
+    new Timer(new Duration(milliseconds:10), () {
+      _partnersLoaded('[{"id":"65","name":"zzzzzzzzzzzzzzz"},{"id":"66","name":"ttttttttttttt"},{"id":"67","name":"ssssssssss"},{"id":"68","name":"uuuu"},{"id":"69","name":"fdsfdsfsd"},{"id":"70","name":"fdsfds"}]');
+    });
   }
 
   void _loadDeveloperList() {
     var url = "/modules/mod_orchit_baumodul/ajax/getByInput_Admin.php?type=53";
     // call the web server asynchronously
-    HttpRequest.getString(url).then(_developersLoaded).catchError(handleHttpErrorGeneric);
+//    HttpRequest.getString(url).then(_developersLoaded).catchError(handleHttpErrorGeneric);
+    //Mock server
+    new Timer(new Duration(milliseconds:10), () {
+      _developersLoaded('[{"id":"38","name":"1"},{"id":"39","name":"2"},{"id":"41","name":"4"},{"id":"42","name":"5"},{"id":"43","name":"gggggggggg"},{"id":"44","name":"gdgfdgsdfg"}]');
+    });
   }
 
   void _loadPartnerConnections() {
     var url = "/modules/mod_orchit_baumodul/ajax/getByInput_Admin.php?type=55&partnerId=${currentId}";
     // call the web server asynchronously
-    HttpRequest.getString(url).then((result)=>handleOptionItemResult(partnerConnections,result)).catchError(handleHttpErrorGeneric);
+//    HttpRequest.getString(url).then((result)=>handleOptionItemResult(partnerConnections,result)).catchError(handleHttpErrorGeneric);
+    //Mock server
+    new Timer(new Duration(milliseconds:10), () {
+      handleOptionItemResult(partnerConnections,'[]');
+    });
   }
 
   void _loadDeveloperConnections() {
     var url = "/modules/mod_orchit_baumodul/ajax/getByInput_Admin.php?type=34&partnerId=${currentId}";
     // call the web server asynchronously
-    HttpRequest.getString(url).then((result)=> handleOptionItemResult(developerConnections,result)).catchError(handleHttpErrorGeneric);
+//    HttpRequest.getString(url).then((result)=> handleOptionItemResult(developerConnections,result)).catchError(handleHttpErrorGeneric);
+    //Mock server
+    new Timer(new Duration(milliseconds:10), () {
+      handleOptionItemResult(developerConnections,'[{"id":"23","name":"IQ-rrrr GmbH"},{"id":"42","name":"5fxf"}]');
+    });
   }
 
   void _loadCountiesByState() {
     var url = "/modules/mod_orchit_baumodul/ajax/getByInput.php?type=11&stateId=${selectedState}";
     // call the web server asynchronously
-    HttpRequest.getString(url).then(_countiesLoaded).catchError(handleHttpErrorGeneric);
+    //HttpRequest.getString(url).then(_countiesLoaded).catchError(handleHttpErrorGeneric);
   }
 
   void _countiesLoaded(String dataString) {
@@ -236,7 +257,12 @@ class PartnerAdminController {
   void _loadPartner(int newId) {
     var url = "/modules/mod_orchit_baumodul/ajax/getByInput_Admin.php?type=46&partnerId=${newId}";
     // call the web server asynchronously
-    var request = HttpRequest.getString(url).then(_partnerLoaded).catchError(handleHttpErrorGeneric);
+//    var request = HttpRequest.getString(url).then(_partnerLoaded).catchError(handleHttpErrorGeneric);
+    //Mock server
+    new Timer(new Duration(milliseconds:10), () {
+      _partnerLoaded('[{"id":"42","name":"FgfgdfgdfmbH","image":"\/modules\/mod_orchit_baumodul\/ajax\/getData.php?dataId=34","mail":"info@dachdeggdfr.de","uri":"http:\/\/www.dacgdfgdfr.de","tel":"+49 (0)44ffff 43","fax":"","description":"","paidAtTime":"0","lastEditFrom":"SQL","lastEditTime":"0","isGlobal":"0","mainCathegory":"0","subCathegory":"0","city":"Oldenburg","department":"Dachdecker","streetName":"Hoffftr.","streetNumber":"23","zipcode":"261435","mobile":"","dataId":"34","mainCategoryId":"1","deleted":"0","contactName":"Rgdfdfgster","contactEmail":"info@dachdgdfgfer.de","contactTelephone":"+49 (0)43 3 43","status":"0","availableStatuses":[{"id":0,"name":"Freigeschaltet"},{"id":1,"name":"Inaktiv"},{"id":2,"name":"Gel\u00f6scht"},{"id":4,"name":"Wartet auf Best\u00e4tigung"},{"id":8,"name":"Wartet auf Freischaltung"}]}]');
+    });
+
   }
 
   void _partnerLoaded(String dataString) {

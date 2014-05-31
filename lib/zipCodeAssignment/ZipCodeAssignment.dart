@@ -83,17 +83,21 @@ class ZipCodeAssignmentComponent {
 
   void _loadStates() {
     var url = "/modules/mod_orchit_baumodul/ajax/getByInput_Admin.php?type=56";
-    HttpRequest.getString(url).then((String result) => handleOptionItemResult(states, result)).catchError(handleHttpErrorGeneric);
+    //HttpRequest.getString(url).then((String result) => handleOptionItemResult(states, result)).catchError(handleHttpErrorGeneric);
+    //Mock server
+    new Timer(new Duration(milliseconds:10), () {
+      handleOptionItemResult(states,'[{"id":"13","name":"Baden-W\u00fcrttemberg"},{"id":"11","name":"Bayern"},{"id":"14","name":"Berlin"},{"id":"24","name":"Brandenburg"},{"id":"17","name":"Bremen"},{"id":"25","name":"Hamburg"},{"id":"23","name":"Hessen"},{"id":"19","name":"Mecklenburg-Vorpommern"},{"id":"12","name":"Niedersachsen"},{"id":"21","name":"Nordrhein-Westfalen"},{"id":"15","name":"Rheinland-Pfalz"},{"id":"16","name":"Saarland"},{"id":"18","name":"Sachsen"},{"id":"20","name":"Sachsen-Anhalt"},{"id":"10","name":"Schleswig-Holstein"},{"id":"22","name":"Th\u00fcringen"}]');
+    });
   }
 
   void _loadCountiesByState() {
     var url = "/modules/mod_orchit_baumodul/ajax/getByInput.php?type=11&stateId=${selectedState}";
-    HttpRequest.getString(url).then((String result) => handleOptionItemResult(counties, result)).catchError(handleHttpErrorGeneric);
+    //HttpRequest.getString(url).then((String result) => handleOptionItemResult(counties, result)).catchError(handleHttpErrorGeneric);
   }
 
   void _loadZipCodesByCounty() {
     var url = "/modules/mod_orchit_baumodul/ajax/getByInput_Admin.php?type=57&countyId=${selectedCounty}";
-    HttpRequest.getString(url).then((String result) => handleOptionItemResult(zipCodes, result)).catchError(handleHttpErrorGeneric);
+    //HttpRequest.getString(url).then((String result) => handleOptionItemResult(zipCodes, result)).catchError(handleHttpErrorGeneric);
   }
 
   void _loadParentConnections() {
@@ -103,7 +107,7 @@ class ZipCodeAssignmentComponent {
       return;
     }
     var url = "/modules/mod_orchit_baumodul/ajax/getByInput_Admin.php?type=${getConnectionsType}&parentId=${parentId}";
-    HttpRequest.getString(url).then((String result) => handleOptionItemResult(connections, result)).catchError(handleHttpErrorGeneric);
+   // HttpRequest.getString(url).then((String result) => handleOptionItemResult(connections, result)).catchError(handleHttpErrorGeneric);
   }
 
   void updateSearchTerm() {
@@ -115,7 +119,7 @@ class ZipCodeAssignmentComponent {
       } else {
         value = Uri.encodeFull(value);
         var url = "/modules/mod_orchit_baumodul/ajax/getByInput.php?type=38&searched=${value}";
-        HttpRequest.getString(url).then((String result) => handleOptionItemResult(zipCodes, result)).catchError(handleHttpError);
+        //HttpRequest.getString(url).then((String result) => handleOptionItemResult(zipCodes, result)).catchError(handleHttpError);
       }
     });
   }

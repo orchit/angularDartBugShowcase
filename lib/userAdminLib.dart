@@ -48,7 +48,11 @@ class UserAdminPage {
     if (newId == null) {
       userInfo = null;
     } else {
-      HttpRequest.getString(GETBYINPUT_ADMIN + "type=5&userId=${newId}").then(_userData).catchError(handleHttpErrorGeneric);
+      //HttpRequest.getString(GETBYINPUT_ADMIN + "type=5&userId=${newId}").then(_userData).catchError(handleHttpErrorGeneric);
+      //Mock server
+      new Timer(new Duration(milliseconds:10), () {
+        _userData('[{"id":"588","name":"Patrick Corneli\u00dfen","email":"pcornelissen@ttt.de","username":"pcornelissen"}]');
+      });
     }
   }
 
@@ -81,14 +85,26 @@ class UserAdminPage {
       var url = "/modules/mod_orchit_baumodul/ajax/getByInput_Admin.php?type=50&term=" + Uri.encodeComponent(newTerm);
       // call the web server asynchronously
       searchRequestTimer = new Timer(new Duration(milliseconds:400), () {
-        HttpRequest.getString(url).then(_usersLoaded).catchError(handleHttpErrorGeneric);
+        //HttpRequest.getString(url).then(_usersLoaded).catchError(handleHttpErrorGeneric);
+        //Mock server
+        new Timer(new Duration(milliseconds:10), () {
+          _usersLoaded('[{"id":"588","name":"Patrick Corneli\u00dfen (pcornelissen@ttt.de)"}]');
+        });
       });
     }
   }
 
   void getDeveloperData(newId) {
-    HttpRequest.getString(GETBYINPUT_ADMIN + "type=7&devId=${newId}").then(_developerUserList).catchError(handleHttpErrorGeneric);
-    HttpRequest.getString(GETBYINPUT_ADMIN + "type=6&devId=${newId}").then(_devData).catchError(handleHttpErrorGeneric);
+    //HttpRequest.getString(GETBYINPUT_ADMIN + "type=7&devId=${newId}").then(_developerUserList).catchError(handleHttpErrorGeneric);
+    //Mock server
+    new Timer(new Duration(milliseconds:10), () {
+      _developerUserList('[{"id":"586","name":"Maik ttt"},{"id":"593","name":"Karl aaa"}]');
+    });
+//    HttpRequest.getString(GETBYINPUT_ADMIN + "type=6&devId=${newId}").then(_devData).catchError(handleHttpErrorGeneric);
+    //Mock server
+    new Timer(new Duration(milliseconds:10), () {
+      _devData('[{"id":"25","name":"S & R ghfdfhjsdg","image":"modules\/mod_orchit_baumodul\/ajax\/getData.php?dataId=5"}]');
+    });
   }
 
   UserAdminPage() {
@@ -99,7 +115,11 @@ class UserAdminPage {
   void _loadDeveloperList() {
     var url = "/modules/mod_orchit_baumodul/ajax/getByInput_Admin.php?type=53";
     // call the web server asynchronously
-    var request = HttpRequest.getString(url).then(_developersLoaded).catchError(handleHttpErrorGeneric);
+//    var request = HttpRequest.getString(url).then(_developersLoaded).catchError(handleHttpErrorGeneric);
+    //Mock server
+    new Timer(new Duration(milliseconds:10), () {
+      _developersLoaded('[{"id":"42","name":"5"},{"id":"43","name":"gggggggggg"},{"id":"44","name":"gdgfdgsdfg"}]');
+    });
   }
 
   void _usersLoaded(String dataString) {

@@ -3,18 +3,18 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Administration</title>
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/templates/baumyhaustemplate/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/templates/baumyhaustemplate/css/bootstrap-responsive.min.css"/>
-    <link rel="stylesheet" href="/templates/baumyhaustemplate/css/normalize.css"/>
-    <link rel="stylesheet" href="/templates/baumyhaustemplate/css/template.css"/>
-    <link rel="stylesheet" href="/templates/baumyhaustemplate/css/modal.css"/>
-    <link rel="stylesheet" href="/modules/mod_orchit_baumodul/admin/web/css/admin-user.css"/>
+    <link rel="stylesheet" href="/admin/web/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/admin/web/css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" href="/admin/web/css/normalize.css"/>
+    <link rel="stylesheet" href="/admin/web/css/template.css"/>
+    <link rel="stylesheet" href="/admin/web/css/modal.css"/>
+    <link rel="stylesheet" href="/admin/web/css/admin-user.css"/>
 </head>
 <body ng-app admin-base permissions>
 <div class="row-fluid">
     <div class="sidebar-admin">
         <header id="logo-admin">
-            <img src="/modules/mod_orchit_baumodul/admin/web/images/logo.png" alt="BAUmyHAUS.de"/>
+            <img src="/admin/web/images/logo.png" alt="BAUmyHAUS.de"/>
         </header>
         <nav id="nav-admin" >
             <ul>
@@ -24,21 +24,8 @@
                 <li class="section" id="adminSection" permissionCheck>
                     <div class="sprite-admin-admin"></div>
                     <h2>Verwalten</h2>
-                    <a id="developerLink" href="#/developer" permissionCheck menuItem>Bauunternehmen</a>
                     <a id="partnerLink" href="#/partner" permissionCheck menuItem>Werbepartner</a>
                     <a id="userAdminLink" href="#/userAdmin" permissionCheck menuItem>Nutzer zuordnen</a>
-                </li>
-                <li class="section" id="contentSection" permissionCheck>
-                    <div class="sprite-admin-content"></div>
-                    <h2>Artikel</h2>
-                    <a id="newsLink" href="#/news" permissionCheck menuItem>News</a>
-                    <a id="serviceLink" href="#/service" permissionCheck menuItem>Service</a>
-                </li>
-                <li class="section" id="reportsSection" permissionCheck>
-                    <div class="sprite-admin-reports"></div>
-                    <h2>Auswertungen</h2>
-                    <a id="contactsLink" href="#/contacts" permissionCheck menuItem>Kontakte</a>
-                    <a id="visitorsLink" href="#/visitors" permissionCheck menuItem>Besucher</a>
                 </li>
             </ul>
         </nav>
@@ -58,8 +45,6 @@
         GmbH</a>
     </div>
     <div class="content-admin">
-        <!--<span class="pull-right backlink-admin">Sie sind eingeloggt als {currentUser}.</span><br /><br />
-        <a class="pull-right btn btn-primary backlink-admin logout-admin" href="/index.php?option=com_user&task=logout&return=Lw">Logout</a>-->
     </div>
 </footer>
 
